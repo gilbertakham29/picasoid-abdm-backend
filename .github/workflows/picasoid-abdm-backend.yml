@@ -35,9 +35,9 @@ jobs:
           node-version: "18.x"
 
       - name: Install dependencies
-        run:
-          npm install
-
+        run: npm install
+        working-directory:
+          /home/runner/work/picasoid-abdm-backend
           # Other scripts if configured should be added here, such as linting, formating
 
       - name: Deploy to Azure App Service
