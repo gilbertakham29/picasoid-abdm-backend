@@ -22,7 +22,7 @@ env:
 jobs:
   # Builds the application for production.
   # You should configure this environment as close as possible to the production environment, e.g. using Ubuntu for Linux apps, using the same Node version
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
