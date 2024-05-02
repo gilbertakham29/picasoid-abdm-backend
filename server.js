@@ -8,7 +8,7 @@ const app = express();
 const port = 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({ origin: "https://picasoid-abdm.azurewebsites.net" }));
 // Create a connection pool
 const config = {
   user: process.env.USER_NAME,
