@@ -11,10 +11,10 @@ on:
   workflow_dispatch:
 
 env:
-  USER_NAME: ${{secrets.USER_NAME}}
-  PASSWORD: ${{secrets.PASSWORD}}
-  SERVER_NAME: ${{secrets.SERVER_NAME}}
-  DATABASE_NAME: ${{secrets.DATABASE_NAME}}
+  USER_NAME: ${{vars.USER_NAME}}
+  PASSWORD: ${{vars.PASSWORD}}
+  SERVER_NAME: ${{vars.SERVER_NAME}}
+  DATABASE_NAME: ${{vars.DATABASE_NAME}}
 # Optional: environment variables can be injected here
 # You can add these variables in your repository Settings - Secrets and variables - Actions - variables
 
