@@ -1,7 +1,7 @@
-import express from "express";
-import pkg from "mssql";
-import "dotenv/config";
-import cors from "cors";
+const express = require("express");
+const pkg = require("mssql");
+require("dotenv").config();
+const cors = require("cors");
 const { ConnectionPool } = pkg;
 
 const app = express();
@@ -92,7 +92,7 @@ INSERT INTO [dbo].[ABHA_PatientDetails] (
     const result = await request.query(query);
     console.log("Inserted successfully:", result);
 
-    res.send("Data inserted successfully");
+    res.json(result.recordset, { message: "Data inserted successfuly." });
   } catch (error) {
     console.error("Error inserting data:", error);
     res.status(500).json({ error: "Internal server error" });
