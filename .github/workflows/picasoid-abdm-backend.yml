@@ -25,4 +25,4 @@ jobs:
       - run: npm --version
       - uses: actions/checkout@v4
       - run: npm install
-      - run: nodemon server.js
+      - run: node server.js
