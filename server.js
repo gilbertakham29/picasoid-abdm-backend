@@ -16,6 +16,7 @@ const config = {
   password: process.env.PASSWORD,
   server: process.env.SERVER_NAME, // MSSQL server address
   database: process.env.DATABASE_NAME,
+
   options: {
     encrypt: true, // To set true for production
   },
