@@ -34,9 +34,8 @@ jobs:
         with:
           node-version: "18.x"
 
-      - run: npm install
       - run:
-          node server.js
+          npm install
           # Other scripts if configured should be added here, such as linting, formating
 
       - name: Deploy to Azure App Service
