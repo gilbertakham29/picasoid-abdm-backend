@@ -4,11 +4,7 @@
 name: Build and deploy Node.js app to Azure Web App - picasoid-abdm-backend
 
 # Run the workflow whenever change is pushed into the main branch
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+on: push
 
 env:
   USER_NAME: ${{vars.USER_NAME}}
@@ -22,28 +18,12 @@ env:
 jobs:
   # Builds the application for production.
   # You should configure this environment as close as possible to the production environment, e.g. using Ubuntu for Linux apps, using the same Node version
-  build-and-deploy:
+  build-node:
     runs-on: ubuntu-latest
-
+    container: node:20
     steps:
-      - name: Checkout Source
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js version
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18.x"
-
-      - name: Install dependencies
-        run:
-          npm install
-
-          # Other scripts if configured should be added here, such as linting, formating
-
-      - name: Deploy to Azure App Service
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: picasoid-abdm-backend
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: .
-  # Deploy the application to Azure
+      - run: node --version
+      - run: npm --version
+      - uses: actions/checkout@v4
+      - run: npm install
+      - run: nodemon server.js
