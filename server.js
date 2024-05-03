@@ -92,7 +92,7 @@ INSERT INTO [dbo].[ABHA_PatientDetails] (
     const result = await request.query(query);
     console.log("Inserted successfully:", result);
 
-    res.json(result.recordset, { message: "Data inserted successfuly." });
+    res.json({ data: result.recordset, message: "Data inserted successfuly." });
   } catch (error) {
     console.error("Error inserting data:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -125,7 +125,7 @@ app.post("/api/patientlist", async (req, res) => {
 
     console.log("Data fetched successfully:", result);
 
-    res.json(result.recordset);
+    res.json({ data: result.recordset, message: "Data inserted successfuly." });
   } catch (error) {
     console.error("Error executing query:", error);
     res.status(500).json({ error: "Internal server error" });
