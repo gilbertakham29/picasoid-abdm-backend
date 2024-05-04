@@ -9,7 +9,6 @@ const port = process.env.port || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-
 // Create a connection pool
 const config = {
   user: process.env.USER_NAME,
@@ -28,7 +27,7 @@ pool
   .connect()
   .then(() => console.log("Connected to database"))
   .catch((err) => console.error("Database connection failed:", err));
-
+app.get("/", (req, res) => res.send("Picasoid"));
 app.post("/api/patientdetails", async (req, res) => {
   const {
     AbhaID,
@@ -92,16 +91,13 @@ INSERT INTO [dbo].[ABHA_PatientDetails] (
     // Execute query
     const result = await request.query(query);
     console.log("Inserted successfully:", result);
-    res.header(
-      "Access-Control-Allow-Origin",
-      "https://picasoid-abdm-backend.azurewebsites.net"
-    );
     res.send(result.recordset);
   } catch (error) {
     console.error("Error inserting data:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 app.post("/api/patientlist", async (req, res) => {
   const { UHID, Name, DateFrom, Gender, Status } = req.body;
   const request = pool.request();
@@ -128,10 +124,6 @@ app.post("/api/patientlist", async (req, res) => {
     const result = await request.query(query);
 
     console.log("Data fetched successfully:", result);
-    res.header(
-      "Access-Control-Allow-Origin",
-      "https://picasoid-abdm-backend.azurewebsites.net"
-    );
     res.send(result.recordset);
   } catch (error) {
     console.error("Error executing query:", error);
