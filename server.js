@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.port || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: "https://picasoid-abdm.azurewebsites.net" }));
+app.use(cors());
 
 // Create a connection pool
 const config = {
@@ -92,7 +92,10 @@ INSERT INTO [dbo].[ABHA_PatientDetails] (
     // Execute query
     const result = await request.query(query);
     console.log("Inserted successfully:", result);
-
+    res.header(
+      "Access-Control-Allow-Origin",
+      "https://picasoid-abdm-backend.azurewebsites.net"
+    );
     res.send(result.recordset);
   } catch (error) {
     console.error("Error inserting data:", error);
@@ -125,7 +128,10 @@ app.post("/api/patientlist", async (req, res) => {
     const result = await request.query(query);
 
     console.log("Data fetched successfully:", result);
-
+    res.header(
+      "Access-Control-Allow-Origin",
+      "https://picasoid-abdm-backend.azurewebsites.net"
+    );
     res.send(result.recordset);
   } catch (error) {
     console.error("Error executing query:", error);
