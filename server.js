@@ -8,11 +8,7 @@ const app = express();
 const port = process.env.port || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: "https://picasoid-abdm.azurewebsites.net",
-  })
-);
+app.use(cors());
 
 // Create a connection pool
 const config = {
@@ -22,7 +18,7 @@ const config = {
   database: process.env.DATABASE_NAME,
 
   options: {
-    encrypt: true, // To set true for production
+    encrypt: false, // To set true for production
   },
 };
 const pool = new ConnectionPool(config);
@@ -97,7 +93,7 @@ INSERT INTO [dbo].[ABHA_PatientDetails] (
     const result = await request.query(query);
     console.log("Inserted successfully:", result);
 
-    res.json({ data: result.recordset, message: "Data inserted successfuly." });
+    res.send(result.recordset);
   } catch (error) {
     console.error("Error inserting data:", error);
     res.status(500).json({ error: "Internal server error" });
@@ -130,7 +126,7 @@ app.post("/api/patientlist", async (req, res) => {
 
     console.log("Data fetched successfully:", result);
 
-    res.json({ data: result.recordset, message: "Data inserted successfuly." });
+    res.send(result.recordset);
   } catch (error) {
     console.error("Error executing query:", error);
     res.status(500).json({ error: "Internal server error" });
