@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.port || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({ origin: "https://picasoid-abdm.azurewebsites.net" }));
 
 // Create a connection pool
 const config = {
@@ -18,7 +18,7 @@ const config = {
   database: process.env.DATABASE_NAME,
 
   options: {
-    encrypt: false, // To set true for production
+    encrypt: true, // To set true for production
   },
 };
 const pool = new ConnectionPool(config);
