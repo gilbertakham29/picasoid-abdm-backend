@@ -17,7 +17,7 @@ const config = {
   database: process.env.DATABASE_NAME,
 
   options: {
-    encrypt: true, // To set true for production
+    encrypt: false, // To set true for production
   },
 };
 const pool = new ConnectionPool(config);
